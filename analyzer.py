@@ -5,7 +5,6 @@ class Analyzer:
         self.data = data
         self.seen = set()
 
-
     def follow(self, target):
         if target in self.seen:
             return
@@ -21,6 +20,21 @@ class Analyzer:
                 print("error:", e)
                 self.follow(m)
         print()
+
+    @property
+    def unused(self):
+        return self.every - self.seen
+
+    @property
+    def every(self):
+        res = set()
+        for v in self.data.values():
+            for i in v["import"]:
+                res.add(i)
+            for m, n in v["from"]:
+                res.add(m)
+                res.add(f"{m}.{n}")
+        return res
 
 
 

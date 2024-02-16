@@ -27,22 +27,10 @@ def main():
          ana.follow(target)
 
     seen = ana.seen
-    every = get_every(res)
-    unused = every - seen
+    unused = ana.unused
 
     print(itemize(seen, "seen"))
     print(itemize(unused, "unused"))
-
-
-def get_every(collected):
-    every = set()
-    for v in collected.values():
-        for i in v["import"]:
-            every.add(i)
-        for m, n in v["from"]:
-            every.add(m)
-            every.add(f"{m}.{n}")
-    return every
 
 
 
