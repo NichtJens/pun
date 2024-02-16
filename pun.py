@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 import argparse
 
+from analyze import analyze
 from collect import collect
 #from jsonext import json_save
-from analyze import analyze
-
 
 
 def main():
