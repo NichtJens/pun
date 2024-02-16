@@ -1,5 +1,7 @@
 # pun — python unused
 
+![pun](https://github.com/NichtJens/pun/assets/1607379/2c87fa02-c55d-4c0d-9633-ebbaa305471b)
+
 ## overview
 
 pun searches for unused parts of a python codebase via statically analysing imports.
