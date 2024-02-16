@@ -3,8 +3,8 @@ import argparse
 
 from collect import collect
 #from jsonext import json_save
-from analyzer import Analyzer
-from printing import itemize
+from analyze import analyze
+
 
 
 def main():
@@ -20,17 +20,7 @@ def main():
 
 #    json_save(res, "res.json")
 
-    ana = Analyzer(res)
-
-    targets = clargs.targets
-    for target in targets:
-         ana.follow(target)
-
-    seen = ana.seen
-    unused = ana.unused
-
-    print(itemize(seen, "seen"))
-    print(itemize(unused, "unused"))
+    analyze(res, clargs.targets)
 
 
 
