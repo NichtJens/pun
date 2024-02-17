@@ -1,5 +1,5 @@
-from analyzer import Analyzer
-from printing import itemize
+from .analyzer import Analyzer
+from .printing import itemize
 
 
 def analyze(data, targets):

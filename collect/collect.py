@@ -1,6 +1,6 @@
-from ast_read import ast_read
-from collector import Collector
-from scripts import find_scripts, fn_to_module
+from .ast_read import ast_read
+from .collector import Collector
+from .scripts import find_scripts, fn_to_module
 
 
 def collect(path, ignore):
