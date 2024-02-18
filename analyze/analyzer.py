@@ -5,21 +5,33 @@ class Analyzer:
         self.data = data
         self.seen = set()
 
-    def follow(self, target):
+
+    def follow(self, target, level=0):
+        arrow = make_arrow(level)
+
         if target in self.seen:
+            print(arrow, target, "[SEEN]")
             return
-        print(">>>", target)
+
         self.seen.add(target)
-        start = self.data[target]
+
+        try:
+            start = self.data[target]
+        except KeyError:
+            print(arrow, target, "[UNKNOWN]")
+            raise
+
+        print(arrow, target)
+
         for i in start["import"]:
-            self.follow(i)
+            self.follow(i, level=level+1)
+
         for m, n in start["from"]:
             try:
-                self.follow(f"{m}.{n}")
-            except Exception as e:
-                print("error:", e)
-                self.follow(m)
-        print()
+                self.follow(f"{m}.{n}", level=level+1)
+            except KeyError:
+                self.follow(m, level=level+1)
+
 
     @property
     def unused(self):
@@ -35,6 +47,14 @@ class Analyzer:
                 res.add(m)
                 res.add(f"{m}.{n}")
         return res
+
+
+
+def make_arrow(lvl):
+    if lvl == 0:
+        return "@"
+    bar = "---" * lvl
+    return bar[:-1] + ">"
 
 
 
